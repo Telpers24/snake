@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Snake Game</title>
-    <link href="https://fonts.googleapis.com/css?family=Antic+Slab" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Antic+Slab" rel="stylesheet">
 
     </head>
 
@@ -21,7 +21,7 @@
             #score {
                 text-align: center;
                 font-size: 140px;
-                font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+                font-family: 'Antic Slab', serif;
             }
         </style>
     </body>
@@ -38,7 +38,7 @@
         let snake = [
             {x: 150, y: 150},
             {x: 140, y: 150},
-            {x: 130, y: 150},
+            {x: 130, y: 150}
         ]
 
         // The user's score
@@ -73,11 +73,11 @@
         function main() {
             if (didGameEnd()) return;
 
-            setTimeout(function onTick(){
-                changeDirection = false;
+            setTimeout(function onTick() {
+                changingDirection = false;
                 clearCanvas();
                 drawFood();
-                adavanceSnake();
+                advanceSnake();
                 drawSnake();
 
                 // Call game again
@@ -144,7 +144,7 @@
          */
         function didGameEnd() {
             for (let i = 4; i < snake.length; i++) {
-                if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) return true
+                if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) return true;
             }
 
             const hitLeftWall = snake[0].x < 0;
@@ -152,7 +152,7 @@
             const hitTopWall = snake[0].y < 0;
             const hitBottomWall = snake[0].y > gameCanvas.height - 10;
 
-            return hitLeftWall || hitRightWall || hitTopWall || hitBottomWall
+            return hitLeftWall || hitRightWall || hitTopWall || hitBottomWall;
         }
 
         /**
@@ -191,7 +191,7 @@
 
         /**
          * Draws a part of the snake on the canvas
-         * @param snakePart - the coords where the part should be drawn
+         * @param { object }snakePart - the coords where the part should be drawn
          */
         function drawSnakePart(snakePart) {
             // Set the color of the snake
@@ -212,7 +212,7 @@
          * according to the key that was pressed.
          * The direction cannot be switched to teh opposite direction,
          * to prevent the snake form reversing
-         * @param event - the keydown event
+         * @param { object } event - the keydown event
          */
         function changeDirection(event) {
             const LEFT_KEY = 37;
@@ -220,8 +220,8 @@
             const UP_KEY = 38;
             const DOWN_KEY = 40;
 
-            // Prevent reversing snake
-            if (changeDirection) return;
+            if (changingDirection) return;
+
             changingDireciton = true;
 
             const keyPressed = event.keyCode;
