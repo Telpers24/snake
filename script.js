@@ -6,13 +6,14 @@ closeBtn.addEventListener("click", () => {
     reset();
 });
 
-const GAME_SPEED = 100;
 const CANVAS_BORDER_COLOR = 'black';
 const CANVAS_BACKGROUND_COLOR = 'green';
 const SNAKE_COLOR = 'lightgreen';
 const SNAKE_BORDER_COLOR = 'darkgreen';
 const FOOD_COLOR = 'red';
 const FOOD_BORDER_COLOR = 'darkred';
+
+let gameSpeed = 100;
 
 let snake = [
     {x: 150, y: 150},
@@ -44,6 +45,7 @@ const ctx = gameCanvas.getContext("2d");
 // main();
 // // Create the first food location
 // createFood();
+
 // Have Snake Game Prompt before game begins
 clearCanvas();
 model.classList.add("open");
@@ -58,6 +60,7 @@ function reset() {
     dx = 10;
     dy = 0;
     score = 0;
+    gameSpeed = 100;
     document.getElementById('score').innerHTML = score;
     main();
     createFood();
@@ -86,7 +89,7 @@ function main() {
 
         // Call game again
         main();
-    }, GAME_SPEED)
+    }, gameSpeed);
 }
 
 
@@ -134,6 +137,10 @@ function advanceSnake() {
         // Display score on screen
         document.getElementById('score').innerHTML = score;
 
+        if (score % 3 == 0 && gameSpeed > 6) {
+            
+            gameSpeed -= 5;
+        }
         //Generate new food location
         createFood();
     } else {
