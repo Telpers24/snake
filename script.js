@@ -22,6 +22,8 @@ let snake = [
 
 // The user's score
 let score = 0;
+// the user's high score
+let highScore = 0;
 // When set to true the snake is changing direction
 let changingDirection = false;
 // Food x-coord
@@ -38,10 +40,13 @@ const gameCanvas = document.getElementById("gameCanvas");
 // Return a two dimensional drawing context
 const ctx = gameCanvas.getContext("2d");
 
-// Start game
-main();
-// Create the first food location
-createFood();
+// // Start game
+// main();
+// // Create the first food location
+// createFood();
+// Have Snake Game Prompt before game begins
+clearCanvas();
+model.classList.add("open");
 // Call changeDirection whenever a key is pressed
 document.addEventListener("keydown", changeDirection);
 
@@ -52,6 +57,8 @@ function reset() {
     snake = [{x: 150, y: 150}, {x: 140, y: 150}, {x: 130, y: 150}];
     dx = 10;
     dy = 0;
+    score = 0;
+    document.getElementById('score').innerHTML = score;
     main();
     createFood();
 }
@@ -62,6 +69,10 @@ function reset() {
  */
 function main() {
     if (didGameEnd()) {
+        if (score > highScore) {
+            highScore = score;
+        }
+        document.getElementById("highScore").innerHTML = "High Score: " + highScore;
         model.classList.add("open");
         return;
     }
